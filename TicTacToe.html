@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe</title>
+    <style type="text/css">
+        table {
+            width: 100%;
+            border: none;
+            border-collapse: collapse;
+        }
+        td {
+            width: 33.33%;
+            border: 6px solid #222;
+        }
+        td:after {
+            display: inline-block;
+            margin-top: 80%;
+            content: '';
+
+        }
+        td:first-of-type {
+            border-left-color: transparent;
+            border-top-color: transparent;
+        }
+        td:nth-of-type(2) {
+            border-top-color: transparent;
+        }
+        td:nth-of-type(3) {
+            border-right-color: transparent;
+            border-top-color: transparent;
+        }
+        tr:nth-of-type(3) td {
+            border-bottom-color: transparent;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1 align="center">Tic Tac Toe</h1>
+</header>
+<table id ="TicTacToe">
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+</body>
+</html>
