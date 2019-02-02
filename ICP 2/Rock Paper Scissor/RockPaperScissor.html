@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RockPaperScissor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link href="Styles.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <h1 align="center"> Rock Paper Scissor App </h1>
+</header>
+<p align="center"> Choose Rock, Paper or Scissor to play!
+</p>
+<div class="row" align="center" id="rockpaperscissor">
+        <img src="Rock.png" id="Rock" class="btTxt submit" onclick=IChooseRock()>
+
+        <img src="Paper.png" id="Paper" class="btTxt submit" onclick=IChoosePaper()>
+
+        <img src="Scissors.png" id="Scissor" class="btTxt submit" onclick=IChooseScissor()>
+</div>
+<p align="center"> Computer Chooses: </p>
+<P align="center" id="output"></P>
+<p align="center" id="message"></p>
+<script src="RockPaperScissor.js"></script>
+</body>
+</html>
