@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CalculatorICP</title>
+
+  /* 1. write Typescript code in "app.component.ts" to work with calculator
+  I based my application on the calculator from ICP 2, and translated it into angular */
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 col-lg-offset-4 calc">
+      <p id="logo"> Tonderai's Calculator </p>
+      <div class="screen">
+        <p #equation id="equation" ngModel>{{firstString}}</p>
+        <p #number id="number" ngModel>{{secondString}}</p>
+      </div>
+      <div class="buttons">
+        <div class="button" (click)="calculateAll(0)">0</div>
+        <div class="button" (click)="calculateAll('=')">=</div>
+        <div class="button" (click)="calculateAll('%')">%</div>
+        <div class="button op" (click)="calculateAll('+')">+</div>
+        <div class="button" (click)="calculateAll">1</div>
+        <div class="button" (click)="calculateAll(2)">2</div>
+        <div class="button" (click)="calculateAll(3)">3</div>
+        <div class="button op" (click)="calculateAll('-')">-</div>
+        <div class="button" (click)="calculateAll(4)">4</div>
+        <div class="button" (click)="calculateAll(5)">5</div>
+        <div class="button" (click)="calculateAll(6)">6</div>
+        <div class="button op" (click)="calculateAll('*')">*</div>
+        <div class="button" (click)="calculateAll(7)">7</div>
+        <div class="button" (click)="calculateAll(8)">8</div>
+        <div class="button" (click)="calculateAll(9)">9</div>
+        <div class="button op" (click)="calculateAll('/')">/</div>
+        <div class="button clear" (click)="calculateAll('Clear')">Clear All</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
