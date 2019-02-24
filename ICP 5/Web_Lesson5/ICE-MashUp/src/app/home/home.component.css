@@ -1,0 +1,25 @@
+.parent-container {
+  position: relative;
+  height:100%;
+  width: 100%;
+}
+
+.child-container {
+  color: black;
+  text-align: center;
+  position: center;
+
+}
+.desc {
+  font-family: Georgia;
+  font-size: 17px;
+}
+
+.button-wrapper .btn {
+  margin-bottom:5%;
+}
+
+.mt-0 {
+  margin-top: 2% !important;
+}
+

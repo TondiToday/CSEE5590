@@ -1,0 +1,40 @@
+<div class="parent-container">
+  <div class="child-container">
+    <h2><b>Find your Restaurant
+    </b></h2><br>
+    <form>
+      <div class="form-group">
+        <button type="button" class="btn btn primary col-lg-2 col-lg-offset-5 " (click)="getVenues()">Find nearby Restaurants</button>
+      </div>
+    </form>
+  </div>
+</div><br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12" align="center">
+      <div class="panel panel-default col-lg-12" >
+        <div class="panel-heading"><b>List of Restaurants nearby</b></div>
+        <div class="panel-body">
+
+          <div *ngFor="let venue of venueList" class="list-group-item clearfix">
+            <div class="pull-left">
+              <h4 class="list-group-item-heading">{{ venue.name }}</h4>
+            </div>
+
+            <span class="pull-right">
+             <a href="http://maps.google.com/maps?saddr={{currentLat}},{{currentLong}}
+             &daddr={{venue.location.formattedAddress[0]}},{{venue.location.formattedAddress[1]}},{{venue.location.formattedAddress[2]}}">
+               <img src="../../assets/google.png" style="width: 30px; height: 30px;"></a>
+      </span>
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
