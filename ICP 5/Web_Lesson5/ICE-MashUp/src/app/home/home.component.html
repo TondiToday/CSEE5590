@@ -1,0 +1,21 @@
+<div class="parent-container">
+  <div class="child-container">
+    <h2>Hello, Welcome to <b>Your Translation App
+    </b></h2>
+    <span class="desc">On this page you will find the Translation Application using Yandex API <i>Foursquare & Edamam's Recipe Search API</i> Is used on the second page to find restaurants in the area</span><br><br><br>
+    <form (ngSubmit)="translateStuff(langElement)" #langElement='ngForm'>
+      <div class="form-group">
+        <label>Translate English to Dutch</label><br><br>
+          <div class="form-group col-lg-4 col-lg-offset-4">
+            <input type="text" id="textToTranslate" [(ngModel)]="textToTranslate" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter your text to translate here" />
+          </div><br>
+        <button class="btn btn primary col-lg-2 col-lg-offset-5 button-wrapper" type="submit">Submit</button>
+        <div class="col-lg-12 mt-2" align="center">
+          <div class="panel panel-default col-lg-12" >
+            <div class="list-group-item clearfix">{{translatedText}}</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
