@@ -34,6 +34,24 @@
             android:textSize="16sp" />
 
         <CheckBox
+            android:id="@+id/reese_checked"
+            android:layout_width="181dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16sp"
+            android:paddingLeft="24dp"
+            android:text="@string/ReesePieces"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/mandms_checked"
+            android:layout_width="183dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16sp"
+            android:paddingLeft="24dp"
+            android:text="@string/MandMs"
+            android:textSize="16sp" />
+
+        <CheckBox
             android:id="@+id/chocolate_checked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,12 +96,14 @@
             android:id="@+id/order"
             android:layout_width="171dp"
             android:layout_height="wrap_content"
+            android:onClick="submitOrder"
             android:text="Order" />
 
         <Button
             android:id="@+id/summary"
             android:layout_width="171dp"
             android:layout_height="wrap_content"
+            android:onClick="submitOrder"
             android:text="Summary" />
 
     </LinearLayout>

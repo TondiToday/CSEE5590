@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     final int COFFEE_PRICE = 5;
     final int WHIPPED_CREAM_PRICE = 1;
     final int CHOCOLATE_PRICE = 2;
+    final int REESE_PIECE = 4;
+    final int M_AND_M = 2;
     int quantity = 3;
 
     @Override
@@ -36,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
 
-
     public void submitOrder(View view) {
 
         // get user input
@@ -51,38 +52,80 @@ public class MainActivity extends AppCompatActivity {
         CheckBox chocolate = (CheckBox) findViewById(R.id.chocolate_checked);
         boolean hasChocolate = chocolate.isChecked();
 
+        // check if reeses pieces is selected
+        CheckBox ReesePiece = (CheckBox) findViewById(R.id.reese_checked);
+        boolean hasReese = ReesePiece.isChecked();
+
+        // check if m&ms pieces is selected
+        CheckBox MandMs = (CheckBox) findViewById(R.id.mandms_checked);
+        boolean hasMandMs = MandMs.isChecked();
+
         // calculate and store the total price
-        float totalPrice = calculatePrice(hasWhippedCream, hasChocolate);
+        float totalPrice = calculatePrice(hasWhippedCream, hasChocolate, hasMandMs, hasReese);
+        switch (view.getId()) {
+            case R.id.summary:
+                String orderSummaryMessage = createOrderSummary(userInputName, hasWhippedCream, hasChocolate, hasMandMs, hasReese, totalPrice);
+                Log.i("order summary 2",orderSummaryMessage);
+                if (orderSummaryMessage != null) {
+                    Log.i("going to new intent", " ");
+                    newIntent(orderSummaryMessage);
+                }
+                break;
+            case R.id.order:
+                String orderSummaryMessage2 = createOrderSummary(userInputName, hasWhippedCream, hasChocolate, hasMandMs, hasReese, totalPrice);
+                Log.i("order summary 1",orderSummaryMessage2);
+                sendEmail(userInputName, orderSummaryMessage2);
+                break;
+        }
 
-        // create and store the order summary
-        String orderSummaryMessage = createOrderSummary(userInputName, hasWhippedCream, hasChocolate, totalPrice);
 
-        // Write the relevant code for making the buttons work(i.e implement the implicit and explicit intents
-
+    }
+    public void newIntent(String string1){
+        Intent sumintent = new Intent(MainActivity.this, Summary.class);
+        sumintent.putExtra("key", string1);
+        MainActivity.this.startActivity(sumintent);
     }
 
     public void sendEmail(String name, String output) {
-        // Write the relevant code for triggering email
+        Log.i("Send email", "");
 
-        // Hint to accomplish the task
+        String[] TO = {"tonditfk@gmail.com"};
+        String[] CC = {"tondi@hotmail.com"};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
 
-        /*Intent intent = new Intent(Intent.ACTION_VIEW);
-        if (intent.resolveActivity(getPackageManager()) !=null){
-            startActivity(intent);
-        }*/
+
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, name + "'s Order");
+        emailIntent.putExtra(Intent.EXTRA_TEXT,  output);
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            finish();
+            Log.i("Finished sending email.", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(MainActivity.this,
+                    "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private String boolToString(boolean bool) {
         return bool ? (getString(R.string.yes)) : (getString(R.string.no));
     }
 
-    private String createOrderSummary(String userInputName, boolean hasWhippedCream, boolean hasChocolate, float price) {
+    private String createOrderSummary(String userInputName, boolean hasWhippedCream, boolean hasChocolate, boolean hasReese, boolean hasMandMs, float price) {
         String orderSummaryMessage = getString(R.string.order_summary_name, userInputName) + "\n" +
                 getString(R.string.order_summary_whipped_cream, boolToString(hasWhippedCream)) + "\n" +
                 getString(R.string.order_summary_chocolate, boolToString(hasChocolate)) + "\n" +
+                getString(R.string.order_summary_reese, boolToString(hasReese)) + "\n" +
+                getString(R.string.order_summary_mandms, boolToString(hasMandMs)) + "\n" +
                 getString(R.string.order_summary_quantity, quantity) + "\n" +
                 getString(R.string.order_summary_total_price, price) + "\n" +
                 getString(R.string.thank_you);
+        Log.i("create order summary",orderSummaryMessage);
+
         return orderSummaryMessage;
     }
 
@@ -91,13 +134,19 @@ public class MainActivity extends AppCompatActivity {
      *
      * @return total Price
      */
-    private float calculatePrice(boolean hasWhippedCream, boolean hasChocolate) {
+    private float calculatePrice(boolean hasWhippedCream, boolean hasChocolate, boolean hasReese, boolean hasMandMs) {
         int basePrice = COFFEE_PRICE;
         if (hasWhippedCream) {
             basePrice += WHIPPED_CREAM_PRICE;
         }
         if (hasChocolate) {
             basePrice += CHOCOLATE_PRICE;
+        }
+        if (hasReese) {
+            basePrice += REESE_PIECE;
+        }
+        if (hasMandMs){
+            basePrice += M_AND_M;
         }
         return quantity * basePrice;
     }
