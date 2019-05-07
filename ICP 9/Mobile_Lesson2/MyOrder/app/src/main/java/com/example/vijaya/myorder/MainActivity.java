@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     private static final String MAIN_ACTIVITY_TAG = "MainActivity";
     final int COFFEE_PRICE = 5;
@@ -26,18 +28,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button summary = (Button)findViewById(R.id.summary);
+       /* Button summary = (Button)findViewById(R.id.summary);
         summary.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivity(new Intent(MainActivity.this, Summary.class));
+
             }
-        });
+        });*/
     }
 
     /**
      * This method is called when the order button is clicked.
      */
-
     public void submitOrder(View view) {
 
         // get user input
@@ -62,27 +64,25 @@ public class MainActivity extends AppCompatActivity {
 
         // calculate and store the total price
         float totalPrice = calculatePrice(hasWhippedCream, hasChocolate, hasMandMs, hasReese);
-        switch (view.getId()) {
-            case R.id.summary:
-                String orderSummaryMessage = createOrderSummary(userInputName, hasWhippedCream, hasChocolate, hasMandMs, hasReese, totalPrice);
-                Log.i("order summary 2",orderSummaryMessage);
-                if (orderSummaryMessage != null) {
-                    Log.i("going to new intent", " ");
-                    newIntent(orderSummaryMessage);
-                }
-                break;
-            case R.id.order:
-                String orderSummaryMessage2 = createOrderSummary(userInputName, hasWhippedCream, hasChocolate, hasMandMs, hasReese, totalPrice);
-                Log.i("order summary 1",orderSummaryMessage2);
-                sendEmail(userInputName, orderSummaryMessage2);
-                break;
+        String orderSummaryMessage = createOrderSummary(userInputName, hasWhippedCream, hasChocolate, hasMandMs, hasReese, totalPrice);
+        if(view.getId() == R.id.order){
+            sendEmail(userInputName, orderSummaryMessage);}
+            else{newIntent(orderSummaryMessage);}
+        //switch (view.getId()) {
+        //    case R.id.summary:
+        //        Log.i("order summary 2",orderSummaryMessage);
+        //        newIntent(orderSummaryMessage);
+        //    case R.id.order:
+        //        Log.i("order summary 1",orderSummaryMessage);
+        //        sendEmail(userInputName, orderSummaryMessage);
         }
 
 
-    }
+
     public void newIntent(String string1){
         Intent sumintent = new Intent(MainActivity.this, Summary.class);
-        sumintent.putExtra("key", string1);
+        sumintent.putExtra("stuff", string1);
+        Log.i("string", string1);
         MainActivity.this.startActivity(sumintent);
     }
 
@@ -125,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
                 getString(R.string.order_summary_total_price, price) + "\n" +
                 getString(R.string.thank_you);
         Log.i("create order summary",orderSummaryMessage);
-
         return orderSummaryMessage;
     }
 

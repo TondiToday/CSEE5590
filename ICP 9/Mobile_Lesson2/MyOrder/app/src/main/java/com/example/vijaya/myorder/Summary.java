@@ -13,24 +13,23 @@ import java.util.List;
 
 public class Summary extends AppCompatActivity {
     private ListView lv;
+    private ArrayList<String> arrayList;
+    private String orderSummaryMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
-        Intent intent = getIntent();
-        if (intent.getStringArrayExtra("key") != null){
-        String orderSummaryMessage[] = intent.getStringArrayExtra("key");
-        //lv = (ListView) findViewById(R.id.dynamic);
-        Log.i("order summary", orderSummaryMessage[0]);}
-        else {Log.i("empty bundle"," ");}
-//
-//        List<String> arrayList = new ArrayList<String>();
-//        arrayList.add(orderSummaryMessage);
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-//                this,
-//                android.R.layout.simple_list_item_1,
-//                arrayList);
-//         lv.setAdapter(arrayAdapter);
+        orderSummaryMessage = getIntent().getExtras().getString("stuff");
+        lv = (ListView) findViewById(R.id.dynamic);
+        Log.i("order summary", orderSummaryMessage);
+
+        arrayList = new ArrayList<String>();
+        arrayList.add(orderSummaryMessage);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                arrayList);
+        lv.setAdapter(arrayAdapter);
 
     }
 
